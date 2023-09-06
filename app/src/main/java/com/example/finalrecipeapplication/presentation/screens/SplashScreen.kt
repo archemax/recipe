@@ -19,7 +19,7 @@ fun MySplashScreen(
     ) {
         // logo
         Text(
-            text = "My App",
+            text = "Recipe App",
             style = TextStyle(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
