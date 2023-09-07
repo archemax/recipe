@@ -8,15 +8,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -31,9 +27,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.finalrecipeapplication.R
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainUserScreen() {
@@ -42,69 +41,51 @@ fun MainUserScreen() {
 
     Scaffold(modifier = Modifier
         .fillMaxSize()
-        .padding(8.dp),
+        .padding(0.dp),
 
         topBar = {
             TopAppBar(
                 title = {},
 
-            )
+                )
         },
 
         bottomBar = {
-            NavigationBar(modifier = Modifier.fillMaxWidth()) {
-                NavigationBarItem(
-                    selected = true,
-                    icon = { Icon(Icons.Outlined.Build, contentDescription = null) },
-                    onClick = {},
-                    label = { Text(text = "Recipes") }
-                )
-
-                NavigationBarItem(
-                    selected = true,
-                    icon = {
-                        Icon(
-                            Icons.Outlined.Favorite,
-                            contentDescription = null
-                        )
-                    },
-                    onClick = {},
-                    label = { Text(text = "Favourite") }
-                )
-
-                NavigationBarItem(
-                    selected = true,
-                    icon = { Icon(Icons.Outlined.Person, contentDescription = null) },
-                    onClick = {},
-                    label = { Text(text = "Profile") }
-                )
-            }
+            MyBottomNavigationBar()
         }
 
 
     ) {
-        Column() {
+        Column(modifier = Modifier.padding(8.dp)) {
+
+
             Text(
                 modifier = Modifier.padding(it),
-                text = "what will you cook?"
+                text = "what will you cook?",
+                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+
             )
-            val list = listOf<Int>(1,2,3,4,5,6)
-            LazyColumn(){
-                items(list.size){item-> 
-                    Text(text = "$item")
+            val list = listOf<Int>(1, 2, 3, 4, 5, 6)
+            LazyColumn() {
+                items(list.size) { item ->
+                    MyCard(item = item)
                 }
             }
 
-        }
-       
 
+        }
         SearchBar(
+
             query = text,
             onQueryChange = { text = it },
             onSearch = { active = false },
             active = active,
             onActiveChange = { active = it },
             placeholder = { Text(text = "Search") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.outline_filter_alt_24),
@@ -113,7 +94,7 @@ fun MainUserScreen() {
                         .clickable { }
                         .padding(end = 8.dp, start = 8.dp),
 
-                )
+                    )
             },
             trailingIcon = {
                 if (active) {
@@ -127,14 +108,61 @@ fun MainUserScreen() {
 
             }
         ) {}
+
+
+    }
+}
+
+@Composable
+fun MyBottomNavigationBar(){
+    NavigationBar(modifier = Modifier.fillMaxWidth()) {
+        NavigationBarItem(
+            selected = true,
+            onClick = {},
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.outline_soup_kitchen_24),
+                    contentDescription = null
+                )
+            },
+            label = { Text(text = "Recipes") }
+        )
+
+        NavigationBarItem(
+            selected = true,
+            icon = {
+                Icon(
+                    Icons.Outlined.Favorite,
+                    contentDescription = null
+                )
+            },
+            onClick = {},
+            label = { Text(text = "Favourite") }
+        )
+
+        NavigationBarItem(
+            selected = true,
+            icon = { Icon(Icons.Outlined.Person, contentDescription = null) },
+            onClick = {},
+            label = { Text(text = "Profile") }
+        )
+    }
+}
+
+@Composable
+fun MyCard(item: Int) {
+    Column(modifier = Modifier.padding(8.dp)) {
+        Text(text = "Position")
+        Text(text = "$item")
     }
 }
 
 
-
-
-
-
+@Preview(showSystemUi = true)
+@Composable
+fun MainUserScreenPreview() {
+    MainUserScreen()
+}
 
 
 
