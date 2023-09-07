@@ -63,7 +63,7 @@ fun RecipeCard() {
                     Text(text = "some text")
                 }
                 Row() {
-                    Text(text = "some picture here")
+                    Text(text = "picture")
                 }
                 Spacer(modifier = Modifier.height(18.dp))
                 Row() {

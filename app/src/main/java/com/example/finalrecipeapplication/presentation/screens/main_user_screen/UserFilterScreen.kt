@@ -1,8 +1,10 @@
 package com.example.finalrecipeapplication.presentation.screens.main_user_screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -24,23 +26,40 @@ fun UserFilterScreen() {
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(16.dp)
+                .padding(8.dp)
 
         ) {
-
-
-            IconButton(
-                onClick = { },
+            Row(
                 modifier = Modifier
-                    .size(48.dp)
-                    .clip(MaterialTheme.shapes.small)
+                    .fillMaxWidth()
+                    .padding(end = 16.dp, top = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+
             ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
+                IconButton(
+                    onClick = { },
+                    modifier = Modifier
+                        .size(48.dp)
+                        .clip(MaterialTheme.shapes.small)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
+                OutlinedButton(
+                    onClick = { /*TODO: Clear All*/ },
+                    modifier = Modifier
+
+                        .clip(MaterialTheme.shapes.small)
+                ) {
+                    Text("Clear All")
+                }
             }
+
+
+
             FilterRow("Meal type")
             FilterRow("Allergies")
             FilterRow("Diet")
@@ -65,7 +84,7 @@ fun FilterRow(name: String) {
 
 
 @Preview(showSystemUi = true)
-@Composable()
+@Composable
 fun UserFilterScreenPreview() {
     UserFilterScreen()
 }
