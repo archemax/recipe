@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FinalRecipeApplication</string>
+    <string name="api_key">b687850ebccd4499b8150ca5e3cd1d49</string>
 </resources>

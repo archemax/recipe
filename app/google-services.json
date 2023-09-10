@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "998664279203",
+    "project_id": "finalrecipeapplication",
+    "storage_bucket": "finalrecipeapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998664279203:android:bc85a6845c0fae47fa5b16",
+        "android_client_info": {
+          "package_name": "com.example.finalrecipeapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998664279203-4s52gbvta8tuin97a2qpvaj2t03sa2bo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.finalrecipeapplication",
+            "certificate_hash": "1334ae25cfbf8c4eb6994293162073a91d278a39"
+          }
+        },
+        {
+          "client_id": "998664279203-4e556h7gvefrkuchc6iiju74am6kubls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDInuHJorNikSxfq0--BikHZGB5RwKo6tI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998664279203-4e556h7gvefrkuchc6iiju74am6kubls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
