@@ -43,8 +43,8 @@ fun RecipesListItem(
             modifier = Modifier.fillMaxWidth(),
             //horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Name of the recipe", fontSize = 24.sp)
-            Text(text = "minutes", fontSize = 16.sp)
+            Text(text = recipe.title, fontSize = 24.sp)
+            Text(text = "${recipe.preparationMinutes}", fontSize = 16.sp)
 
         }
     }

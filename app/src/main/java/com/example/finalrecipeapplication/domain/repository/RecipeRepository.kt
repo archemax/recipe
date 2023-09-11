@@ -5,7 +5,7 @@ import com.example.finalrecipeapplication.data.dto.RecipeDto
 
 interface RecipeRepository {
 
-    suspend fun getRecipes(): List<RecipeDto>
+    suspend fun getRecipes(): RecipeDto
 
     suspend fun getRecipeById(recipeId: String): RecipeDetailsDto
 }

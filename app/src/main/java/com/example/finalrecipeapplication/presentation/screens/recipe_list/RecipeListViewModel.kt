@@ -1,6 +1,7 @@
 package com.example.finalrecipeapplication.presentation.screens.recipe_list
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +34,8 @@ class RecipeListViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     _state.value = RecipeListState(recipes = result.data ?: emptyList())
+                    Log.d("AAA", "${result.data}")
+
                 }
 
                 is Resource.Error -> {

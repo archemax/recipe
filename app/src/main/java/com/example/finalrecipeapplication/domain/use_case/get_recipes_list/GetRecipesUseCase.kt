@@ -21,10 +21,10 @@ class GetRecipesUseCase @Inject constructor(
             try {
                 emit(Resource.Loading()) //show progrees bar
 
-                val recipesDtoList = repository.getRecipes()
-                val recipes = recipesDtoList.map { it.toRecipeDataClass() }
+                val recipesDto = repository.getRecipes()
+                val recipesList = listOf(recipesDto.toRecipeDataClass())
 
-                emit(Resource.Success(recipes))
+                emit(Resource.Success(recipesList))
 
             } catch (e: HttpException) {
                 emit(Resource.Error(e.localizedMessage ?: "Unexpected Error"))

@@ -16,7 +16,7 @@ fun RecipeDto.toRecipeDataClass(): RecipeDataClass {
         id = firstRecipe.id,
         image = firstRecipe.image,
         title = firstRecipe.title,
-        preparationMinutes = firstRecipe.preparationMinutes,
-        sourceName = firstRecipe.sourceName
+        preparationMinutes = firstRecipe.preparationMinutes ?: 0,
+        sourceName = firstRecipe.sourceName ?: ""
     )
 }

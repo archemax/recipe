@@ -10,7 +10,7 @@ import javax.inject.Inject
 class RecipeRepositoryImpl @Inject constructor(
     private val api: RecipeApi
 ) : RecipeRepository {
-    override suspend fun getRecipes(): List<RecipeDto> {
+    override suspend fun getRecipes(): RecipeDto {
         return api.getRandomRecipes()
     }
 
