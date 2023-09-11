@@ -1,4 +1,4 @@
-package com.example.finalrecipeapplication.presentation.screens.recipe_list.components
+package com.example.finalrecipeapplication.presentation.screens.recipe_list
 
 import android.os.Build
 import androidx.annotation.RequiresExtension
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalrecipeapplication.common.Resource
 import com.example.finalrecipeapplication.domain.use_case.get_recipes_list.GetRecipesUseCase
+import com.example.finalrecipeapplication.presentation.screens.recipe_list.RecipeListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -26,7 +27,7 @@ class RecipeListViewModel @Inject constructor(
         getRecipes()
     }
 
-    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
+    //@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     private fun getRecipes() {
         getRecipesUseCase().onEach { result ->
             when (result) {

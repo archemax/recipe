@@ -1,4 +1,4 @@
-package com.example.finalrecipeapplication.presentation.screens.recipe_list.components
+package com.example.finalrecipeapplication.presentation.screens.recipe_list
 
 import com.example.finalrecipeapplication.domain.model.RecipeDataClass
 

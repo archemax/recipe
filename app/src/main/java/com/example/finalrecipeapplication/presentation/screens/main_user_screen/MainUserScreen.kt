@@ -1,12 +1,15 @@
 package com.example.finalrecipeapplication.presentation.screens.main_user_screen
 
 
+import android.os.Build
+import androidx.annotation.RequiresExtension
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Favorite
@@ -32,10 +35,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.finalrecipeapplication.R
+import com.example.finalrecipeapplication.presentation.screens.recipe_list.RecipeListViewModel
+import com.example.finalrecipeapplication.presentation.screens.recipe_list.components.RecipesListItem
+
+@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainUserScreen() {
+fun MainUserScreen(
+    navController: NavController,
+    viewModel: RecipeListViewModel = hiltViewModel()
+) {
+    val state = viewModel.state.value
     var text by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
 
@@ -43,21 +56,12 @@ fun MainUserScreen() {
         .fillMaxSize()
         .padding(0.dp),
 
-        topBar = {
-            TopAppBar(
-                title = {},
+        topBar = { TopAppBar(title = {}) },
 
-                )
-        },
-
-        bottomBar = {
-            MyBottomNavigationBar()
-        }
-
+        bottomBar = { MyBottomNavigationBar() }
 
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
-
 
             Text(
                 modifier = Modifier.padding(it),
@@ -65,17 +69,20 @@ fun MainUserScreen() {
                 style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
 
             )
-            val list = listOf<Int>(1, 2, 3, 4, 5, 6)
-            LazyColumn() {
-                items(list.size) { item ->
-                    MyCard(item = item)
+
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                items(state.recipes) { recipe ->
+                    RecipesListItem(
+                        recipe = recipe,
+                        onItemClick = {
+
+                    })
                 }
             }
 
 
         }
         SearchBar(
-
             query = text,
             onQueryChange = { text = it },
             onSearch = { active = false },
@@ -114,7 +121,7 @@ fun MainUserScreen() {
 }
 
 @Composable
-fun MyBottomNavigationBar(){
+fun MyBottomNavigationBar() {
     NavigationBar(modifier = Modifier.fillMaxWidth()) {
         NavigationBarItem(
             selected = true,
@@ -161,7 +168,7 @@ fun MyCard(item: Int) {
 @Preview(showSystemUi = true)
 @Composable
 fun MainUserScreenPreview() {
-    MainUserScreen()
+    //MainUserScreen(navController = NavController(context = Context))
 }
 
 

@@ -54,6 +54,15 @@ android {
 
 dependencies {
 
+    //viewModel
+    def lifecycle_version = "2.6.2"
+    def arch_version = "2.2.0"
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+
     //room
     def room_version = "2.5.2"
     implementation("androidx.room:room-runtime:$room_version")
@@ -68,6 +77,9 @@ dependencies {
     //hilt
     implementation("com.google.dagger:hilt-android:2.46.1")
     kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation 'androidx.hilt:hilt-navigation-compose:1.1.0-alpha01'
+    implementation 'com.google.dagger:hilt-android-gradle-plugin:2.44'
+
 
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -93,7 +105,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-compose:2.7.1'
 
     implementation 'androidx.core:core-ktx:1.10.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
     implementation 'androidx.activity:activity-compose:1.7.2'
     implementation platform('androidx.compose:compose-bom:2022.10.00')
     implementation 'androidx.compose.ui:ui'
