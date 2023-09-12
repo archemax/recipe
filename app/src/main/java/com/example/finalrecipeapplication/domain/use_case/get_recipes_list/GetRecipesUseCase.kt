@@ -5,7 +5,8 @@ import android.os.Build
 import androidx.annotation.RequiresExtension
 import com.example.finalrecipeapplication.common.Resource
 import com.example.finalrecipeapplication.domain.model.RecipeDataClass
-import com.example.finalrecipeapplication.domain.model.toRecipeDataClass
+import com.example.finalrecipeapplication.domain.model.toListRecipeDataClass
+
 import com.example.finalrecipeapplication.domain.repository.RecipeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -22,7 +23,7 @@ class GetRecipesUseCase @Inject constructor(
                 emit(Resource.Loading()) //show progrees bar
 
                 val recipesDto = repository.getRecipes()
-                val recipesList = listOf(recipesDto.toRecipeDataClass())
+                val recipesList = recipesDto.toListRecipeDataClass()
 
                 emit(Resource.Success(recipesList))
 

@@ -1,5 +1,6 @@
 package com.example.finalrecipeapplication.domain.model
 
+import com.example.finalrecipeapplication.data.dto.Recipe
 import com.example.finalrecipeapplication.data.dto.RecipeDto
 
 data class RecipeDataClass(
@@ -10,13 +11,16 @@ data class RecipeDataClass(
     val preparationMinutes: Int,
 )
 
-fun RecipeDto.toRecipeDataClass(): RecipeDataClass {
-    val firstRecipe = this.recipes.first()
-    return RecipeDataClass(
-        id = firstRecipe.id,
-        image = firstRecipe.image,
-        title = firstRecipe.title,
-        preparationMinutes = firstRecipe.preparationMinutes ?: 0,
-        sourceName = firstRecipe.sourceName ?: ""
+fun Recipe.ToRecipeDataClass(): RecipeDataClass =
+    RecipeDataClass(
+        id = this.id,
+        sourceName = this.sourceName,
+        image = this.image,
+        title = this.title,
+        preparationMinutes = this.preparationMinutes,
     )
-}
+
+fun RecipeDto.toListRecipeDataClass(): List<RecipeDataClass> =
+    this.recipes.map { it.ToRecipeDataClass() }
+
+

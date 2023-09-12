@@ -12,7 +12,7 @@ interface RecipeApi {
     @GET("/recipes/random")
     suspend fun getRandomRecipes(
         @Query("apiKey") apiKey: String = Constants.API_KEY,
-
+        @Query("number") number:Int = 20
     ): RecipeDto
 
     @GET("/recipes/{id}/information")
