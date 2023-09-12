@@ -1,7 +1,9 @@
 package com.example.finalrecipeapplication.presentation.screens.main_user_screen
 
 
+import android.content.res.Configuration
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresExtension
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -32,11 +34,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.example.finalrecipeapplication.R
 import com.example.finalrecipeapplication.presentation.screens.recipe_list.RecipeListViewModel
 import com.example.finalrecipeapplication.presentation.screens.recipe_list.components.RecipesListItem
@@ -45,29 +45,26 @@ import com.example.finalrecipeapplication.presentation.screens.recipe_list.compo
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainUserScreen(
-    navController: NavController,
-    viewModel: RecipeListViewModel = hiltViewModel()
+    viewModel: RecipeListViewModel = hiltViewModel(),
+    configuration: Configuration,
+    toOneRecipeScreen: (String) -> Unit
+
 ) {
     val state = viewModel.state.value
     var text by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
 
-    Scaffold(modifier = Modifier
-        .fillMaxSize()
-        .padding(0.dp),
-
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = { TopAppBar(title = {}) },
-
         bottomBar = { MyBottomNavigationBar() }
+    ) { paddingValues ->
 
-    ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-
+        Column(modifier = Modifier.padding(paddingValues)) {
             Text(
-                modifier = Modifier.padding(it),
+                modifier = Modifier.padding(),
                 text = "what will you cook?",
                 style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
-
             )
 
             LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -75,53 +72,58 @@ fun MainUserScreen(
                     RecipesListItem(
                         recipe = recipe,
                         onItemClick = {
-
-                    })
+                            toOneRecipeScreen(recipe.id.toString())
+                            Log.d("AAAid", "${recipe.id}")
+                        })
                 }
             }
 
+            MyBottomNavigationBar()
+        }
+    }
+
+
+    SearchBar(
+        query = text,
+        onQueryChange = { text = it },
+        onSearch = { active = false },
+        active = active,
+        onActiveChange = { active = it },
+        placeholder = { Text(text = "Search") },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+
+        leadingIcon = {
+            Icon(
+                painter = painterResource(id = R.drawable.outline_filter_alt_24),
+                contentDescription = "",
+                Modifier
+                    .clickable { }
+                    .padding(end = 8.dp, start = 8.dp),
+
+                )
+        },
+        trailingIcon = {
+            if (active) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = null,
+                    modifier = Modifier.clickable { text = "" },
+                    tint = LocalContentColor.current
+                )
+            }
 
         }
-        SearchBar(
-            query = text,
-            onQueryChange = { text = it },
-            onSearch = { active = false },
-            active = active,
-            onActiveChange = { active = it },
-            placeholder = { Text(text = "Search") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-
-            leadingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.outline_filter_alt_24),
-                    contentDescription = "",
-                    Modifier
-                        .clickable { }
-                        .padding(end = 8.dp, start = 8.dp),
-
-                    )
-            },
-            trailingIcon = {
-                if (active) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = null,
-                        modifier = Modifier.clickable { text = "" },
-                        tint = LocalContentColor.current
-                    )
-                }
-
-            }
-        ) {}
+    ) {}
 
 
-    }
 }
+
 
 @Composable
 fun MyBottomNavigationBar() {
+
     NavigationBar(modifier = Modifier.fillMaxWidth()) {
         NavigationBarItem(
             selected = true,
@@ -156,20 +158,8 @@ fun MyBottomNavigationBar() {
     }
 }
 
-@Composable
-fun MyCard(item: Int) {
-    Column(modifier = Modifier.padding(8.dp)) {
-        Text(text = "Position")
-        Text(text = "$item")
-    }
-}
 
 
-@Preview(showSystemUi = true)
-@Composable
-fun MainUserScreenPreview() {
-    //MainUserScreen(navController = NavController(context = Context))
-}
 
 
 

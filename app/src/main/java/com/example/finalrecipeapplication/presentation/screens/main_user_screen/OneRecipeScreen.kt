@@ -25,16 +25,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RecipeCard() {
+fun OneRecipeScreen(
+
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        Card(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .weight(1f),
-            shape = MaterialTheme.shapes.medium
-        ) {
+            ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -53,6 +54,7 @@ fun RecipeCard() {
                             .size(48.dp)
                             .clip(MaterialTheme.shapes.small)
                     ) {
+                        //arrow back
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = null,
@@ -60,7 +62,7 @@ fun RecipeCard() {
                         )
                     }
                     Spacer(modifier = Modifier.width(16.dp))
-                    Text(text = "some text")
+                    Text(text = "name of the recipe")
                 }
                 Row() {
                     Text(text = "picture")
@@ -77,10 +79,10 @@ fun RecipeCard() {
     }
 }
 
-@Preview()
+@Preview(showSystemUi = true)
 @Composable
 fun RecipeCardPreview() {
-    RecipeCard()
+    OneRecipeScreen()
 }
 
 

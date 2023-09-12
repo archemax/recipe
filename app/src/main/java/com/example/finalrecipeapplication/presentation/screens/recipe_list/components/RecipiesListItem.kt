@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,15 +17,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.finalrecipeapplication.R
 import com.example.finalrecipeapplication.domain.model.RecipeDataClass
 
 @Composable
 fun RecipesListItem(
     recipe: RecipeDataClass,
-    onItemClick: (RecipeDataClass) -> Unit
+    onItemClick: (RecipeDataClass) -> Unit,
+
 ) {
-    Row(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onItemClick(recipe) }
@@ -36,7 +39,7 @@ fun RecipesListItem(
         Image(
             painter = testImage,
             contentDescription = null,
-            modifier = Modifier.size(width = 100.dp, height = 100.dp)
+            modifier = Modifier.size(width = 70.dp, height = 70.dp)
         )
 
         Column(
@@ -45,6 +48,7 @@ fun RecipesListItem(
         ) {
             Text(text = recipe.title, fontSize = 24.sp)
             Text(text = "${recipe.preparationMinutes}", fontSize = 16.sp)
+            Text(text = recipe.instructions, maxLines = 2)
 
         }
     }
@@ -53,12 +57,16 @@ fun RecipesListItem(
 @Preview(showSystemUi = true)
 @Composable()
 fun RecipesListItemPreview() {
-    RecipesListItem(
-        recipe = RecipeDataClass(
-            1,
-            "name", "Image", "title", 33
-        ),
-
-        onItemClick = {}
-    )
+//    RecipesListItem(
+//        recipe = RecipeDataClass(
+//            1,
+//            "name",
+//            "Image",
+//            "title",
+//            33,
+//            instructions = "instructions"
+//        ),
+//
+//        onItemClick = {}
+//    )
 }
