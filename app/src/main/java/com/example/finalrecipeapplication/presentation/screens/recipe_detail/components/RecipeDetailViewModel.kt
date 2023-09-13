@@ -7,10 +7,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.finalrecipeapplication.common.Constants
 import com.example.finalrecipeapplication.common.Resource
 import com.example.finalrecipeapplication.domain.use_case.get_recipes_list.GetOneRecipeUseCase
-import com.example.finalrecipeapplication.domain.use_case.get_recipes_list.GetRecipesUseCase
 import com.example.finalrecipeapplication.presentation.screens.recipe_detail.components.RecipeDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -28,10 +26,11 @@ class RecipeDetailViewModel @Inject constructor(
     val state: State<RecipeDetailState> = _state // this is immutable state
 
     init {
-        savedStateHandle.get<String>(Constants.PARAM_RECIPE_ID)?.let {recipeId->
-            getOneRecipeDetails(recipeId)
-        }
+        val recipeId =
+            savedStateHandle.get<String>("id").orEmpty()
+        getOneRecipeDetails(recipeId)
     }
+
 
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     private fun getOneRecipeDetails(recipeId: String) {

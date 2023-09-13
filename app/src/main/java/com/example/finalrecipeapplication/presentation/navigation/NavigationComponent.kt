@@ -5,9 +5,12 @@ import android.os.Build
 import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.finalrecipeapplication.presentation.screens.main_user_screen.MainUserScreen
 import com.example.finalrecipeapplication.presentation.screens.main_user_screen.OneRecipeScreen
 
@@ -33,10 +36,13 @@ fun NavigationComponent() {
             )
         }
         composable(
-            route = "${Screen.ONE_RECIPE_SCREEN}/{id}"
+            route = "${Screen.ONE_RECIPE_SCREEN}/{id}",
+            arguments = listOf(navArgument("id"){type = NavType.StringType})
         ) {
-            val id = it.arguments?.getString("id") ?:""
-            OneRecipeScreen()
+            //val id = it.arguments?.getString("id").orEmpty()
+            OneRecipeScreen(
+                navController = navController
+            )
         }
     }
 }

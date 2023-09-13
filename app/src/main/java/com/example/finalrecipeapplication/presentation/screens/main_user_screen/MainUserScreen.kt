@@ -48,7 +48,6 @@ fun MainUserScreen(
     viewModel: RecipeListViewModel = hiltViewModel(),
     configuration: Configuration,
     toOneRecipeScreen: (String) -> Unit
-
 ) {
     val state = viewModel.state.value
     var text by remember { mutableStateOf("") }
@@ -73,7 +72,7 @@ fun MainUserScreen(
                         recipe = recipe,
                         onItemClick = {
                             toOneRecipeScreen(recipe.id.toString())
-                            Log.d("AAAid", "${recipe.id}")
+                            Log.d("AAAid", "${recipe.id}") //working logged
                         })
                 }
             }

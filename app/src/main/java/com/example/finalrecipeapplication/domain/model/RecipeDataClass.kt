@@ -6,7 +6,7 @@ import com.example.finalrecipeapplication.data.dto.RecipeDto
 data class RecipeDataClass(
     val id: Int,
     val sourceName: String,
-    val image: String,
+    val image: String?,
     val title: String,
     val preparationMinutes: Int,
     val instructions: String
