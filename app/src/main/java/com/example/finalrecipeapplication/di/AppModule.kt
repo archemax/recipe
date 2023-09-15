@@ -4,6 +4,8 @@ import com.example.finalrecipeapplication.common.Constants
 import com.example.finalrecipeapplication.data.remote.RecipeApi
 import com.example.finalrecipeapplication.data.repository.RecipeRepositoryImpl
 import com.example.finalrecipeapplication.domain.repository.RecipeRepository
+import com.example.finalrecipeapplication.domain.use_case.get_recipe_by_search.GetRecipeBySearchUseCase
+import com.example.finalrecipeapplication.domain.use_case.get_recipes_list.GetRecipesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,4 +33,23 @@ object AppModule {
     fun provideRecipeRepository(api: RecipeApi): RecipeRepository{
         return RecipeRepositoryImpl(api)
     }
+
+
+    @Provides
+    @Singleton
+    fun provideGetRecipeBySearchUseCase(
+        repository: RecipeRepository
+    ): GetRecipeBySearchUseCase {
+        return GetRecipeBySearchUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetRecipesUseCase(
+        repository: RecipeRepository
+    ): GetRecipesUseCase {
+        return GetRecipesUseCase(repository)
+    }
+
+
 }

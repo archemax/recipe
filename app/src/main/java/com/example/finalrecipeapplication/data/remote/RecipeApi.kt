@@ -3,21 +3,28 @@ package com.example.finalrecipeapplication.data.remote
 import com.example.finalrecipeapplication.common.Constants
 import com.example.finalrecipeapplication.data.dto.RecipeDetailsDto
 import com.example.finalrecipeapplication.data.dto.RecipeDto
+import com.example.finalrecipeapplication.data.dto.RecipesDtoSearchResult
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RecipeApi {
 
-    @GET("/recipes/random")
+    @GET("recipes/random")
     suspend fun getRandomRecipes(
         @Query("apiKey") apiKey: String = Constants.API_KEY,
-        @Query("number") number:Int = 20
+        @Query("number") number: Int = 20
     ): RecipeDto
 
-    @GET("/recipes/{id}/information")
+    @GET("recipes/{id}/information")
     suspend fun getRecipeById(
         @Path("id") id: String,
         @Query("apiKey") apiKey: String = Constants.API_KEY
     ): RecipeDetailsDto
+
+    @GET("recipes/complexSearch")
+    suspend fun getRecipesBySearch(
+        @Query("apiKey") apiKey: String = Constants.API_KEY,
+        @Query("query") query: String = ""
+    ): RecipesDtoSearchResult
 }

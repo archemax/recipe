@@ -48,7 +48,7 @@ fun RecipesListItem(
             )
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = recipe.title,
+                text = recipe.title.toString(),
                 modifier = Modifier.padding(4.dp).weight(1f),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
@@ -61,7 +61,7 @@ fun RecipesListItem(
         ) {
 
             Text(text = "${recipe.preparationMinutes}", fontSize = 16.sp)
-            Text(text = recipe.instructions, maxLines = 2)
+            Text(text = recipe.instructions.toString(), maxLines = 2)
 
         }
     }

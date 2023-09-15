@@ -2,15 +2,17 @@ package com.example.finalrecipeapplication.presentation
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresExtension
-import androidx.navigation.compose.rememberNavController
-
+import com.example.finalrecipeapplication.data.remote.RetrofitLogging
 import com.example.finalrecipeapplication.presentation.navigation.NavigationComponent
-import com.example.finalrecipeapplication.presentation.screens.main_user_screen.MainUserScreen
 import com.example.finalrecipeapplication.ui.theme.FinalRecipeApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -21,9 +23,23 @@ class MainActivity : ComponentActivity() {
             FinalRecipeApplicationTheme {
                 NavigationComponent()
             }
+
+
         }
+//        val recipeApi = RetrofitLogging.create()
+//        GlobalScope.launch(Dispatchers.IO) {
+//            try {
+//                val response = recipeApi.getRandomRecipes(
+//
+//                )
+//                Log.d("responseBody", "$response")
+//            } catch (e: Exception) {
+//            }
+//
+//        }
     }
 }
+
 
 
 
